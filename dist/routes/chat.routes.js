@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const chat_controller_1 = require("../controllers/chat.controller");
+const tokenValidate_1 = require("../middlewares/tokenValidate");
+const chatRouter = express_1.Router();
+chatRouter.post("/:id", tokenValidate_1.validateToken, chat_controller_1.sendMessage);
+chatRouter.post("/mensajes/cargar", tokenValidate_1.validateToken, chat_controller_1.loadMessages);
+chatRouter.delete("/mensajes/borrar", tokenValidate_1.validateToken, chat_controller_1.deleteMessages);
+exports.default = chatRouter;
